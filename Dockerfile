@@ -37,7 +37,7 @@ RUN \
 
 # Install Supervisor.
 RUN \
-  apt-get install python python-dev && \
+  apt-get install -y python python-dev && \
   wget https://bootstrap.pypa.io/ez_setup.py -O - | python && \
   easy_install pip && pip install supervisor
 ADD supervisord.conf /etc/supervisord.conf
