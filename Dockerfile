@@ -42,7 +42,7 @@ VOLUME ["/data", "/etc/nginx/sites-enabled", "/var/log/nginx"]
 WORKDIR /etc/nginx
 
 # Define default command.
-CMD ["nginx"]
+CMD ["service php5-fpm start && nginx"]
 
 # Expose ports.
 EXPOSE 80
