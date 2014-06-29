@@ -12,8 +12,9 @@ RUN \
   add-apt-repository -y ppa:nginx/stable && \
   apt-get update && \
   apt-get install -y nginx && \
-  echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   chown -R www-data:www-data /var/lib/nginx
+
+# Install php5-fpm, mysql-client.
 RUN \
   apt-get install -y php5-fpm php5-mysql && \
   apt-get install -y php5-cli mysql-client-5.6
@@ -34,6 +35,12 @@ RUN \
   sed -i 's/^;\?\(mbstring.encoding_translation =\).*$/\1 On/' /etc/php5/fpm/php.ini && \
   sed -i 's/^;\?\(mbstring.substitute_character =\).*$/\1 "?"/' /etc/php5/fpm/php.ini
 
+# Install Supervisor.
+RUN \
+  apt-get install python python-dev && \
+  wget https://bootstrap.pypa.io/ez_setup.py -O - | python && \
+  easy_install pip && pip install supervisor
+ADD supervisord.conf /etc/supervisord.conf
 
 # Define mountable directories.
 VOLUME ["/data", "/etc/nginx/sites-enabled", "/var/log/nginx"]
@@ -42,7 +49,7 @@ VOLUME ["/data", "/etc/nginx/sites-enabled", "/var/log/nginx"]
 WORKDIR /etc/nginx
 
 # Define default command.
-CMD ["service php5-fpm start && nginx"]
+CMD ["supervisord"]
 
 # Expose ports.
 EXPOSE 80
