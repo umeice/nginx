@@ -5,7 +5,7 @@
 #
 
 # Pull base image.
-FROM dockerfile/ubuntu
+FROM umeice/python
 
 # Install Nginx.
 RUN \
@@ -35,11 +35,7 @@ RUN \
   sed -i 's/^;\?\(mbstring.encoding_translation =\).*$/\1 On/' /etc/php5/fpm/php.ini && \
   sed -i 's/^;\?\(mbstring.substitute_character =\).*$/\1 "?"/' /etc/php5/fpm/php.ini
 
-# Install Supervisor.
-RUN \
-  apt-get install -y python python-dev && \
-  wget https://bootstrap.pypa.io/ez_setup.py -O - | python && \
-  easy_install pip && pip install supervisor
+# Add Supervisor conf.
 ADD supervisord.conf /etc/supervisord.conf
 
 # Define mountable directories.
