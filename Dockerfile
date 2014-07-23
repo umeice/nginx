@@ -19,7 +19,9 @@ RUN \
   apt-get install -y php5-fpm php5-mysql && \
   apt-get install -y php5-cli mysql-client-5.6
 
+# php-fpm config
 # http://www.tokumaru.org/d/20100927.html
+# https://github.com/eugeneware/docker-wordpress-nginx/blob/master/Dockerfile
 RUN \
   sed -i 's/^;\?\(max_execution_time =\).*$/\1 300/' /etc/php5/fpm/php.ini && \
   sed -i 's/^;\?\(memory_limit =\).*$/\1 256M/' /etc/php5/fpm/php.ini && \
