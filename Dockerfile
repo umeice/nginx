@@ -30,6 +30,7 @@ RUN \
   sed -i 's/^;\?\(upload_max_filesize =\).*$/\1 32M/' /etc/php5/fpm/php.ini && \
   sed -i 's/^;\?\(date.timezone =\).*$/\1 "Asia\/Tokyo"/' /etc/php5/fpm/php.ini && \
   sed -i 's/^;\?\(output_buffering =\).*$/\1 Off/' /etc/php5/fpm/php.ini && \
+  sed -i 's/^;\?\(expose_php =\).*$/\1 Off/' /etc/php5/fpm/php.ini && \
   sed -i 's/^;\?\(default_charset =\).*$/\1 "UTF-8"/' /etc/php5/fpm/php.ini && \
   sed -i 's/^;\?\(mbstring.language =\).*$/\1 Japanese/' /etc/php5/fpm/php.ini && \
   sed -i 's/^;\?\(mbstring.internal_encoding =\).*$/\1 UTF-8/' /etc/php5/fpm/php.ini && \
