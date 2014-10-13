@@ -11,6 +11,7 @@ FROM umeice/python
 RUN \
   add-apt-repository -y ppa:nginx/stable && \
   apt-get update && \
+  apt-get upgrade -y && \
   apt-get install -y nginx && \
   chown -R www-data:www-data /var/lib/nginx
 
